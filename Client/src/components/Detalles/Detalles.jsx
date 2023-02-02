@@ -16,8 +16,7 @@ function Detalles() {
   return (
     <div className="flex flex-col">
     <div className="flex justify-between">
-      <im
-      g src="logo.png" alt="Logo de la tienda" className="h-12 w-12" />
+      <img src={detail.img} alt="Logo de la tienda" className="h-12 w-12" />
       <div className="text-left">
         <h2 className="text-2xl font-bold">{detail.name}</h2>
         <p className="text-sm">{detail.whatsapp}</p>

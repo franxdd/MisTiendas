@@ -4,5 +4,5 @@ const route = Router();
 require("dotenv").config();
 
 
-route.post("/crearProducto", postProducto)
+route.post("/crearProducto" ,postProducto)
 route.put("/modificarProducto", postProducto)

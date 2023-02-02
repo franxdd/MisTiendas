@@ -3,14 +3,14 @@ const createTokens = (user) => {
   const accessToken = sign(
     JSON.stringify({
       username: user.dataValues.username,
-   
-      isAdmin : user.dataValues.isAdmin
+
+      isAdmin: user.dataValues.isAdmin,
     }),
     "jwtsecretcambiar"
   );
 
   return accessToken;
 };
-module.exports={
-    createTokens
-}
+module.exports = {
+  createTokens,
+};

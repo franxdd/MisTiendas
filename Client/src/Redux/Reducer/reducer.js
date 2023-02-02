@@ -9,6 +9,7 @@ import {
   GET_USER,
   PRE_DATOS,
   SEARCH_STORE,
+  CREADO
 } from "../Actions/actions";
 
 const initialState = {
@@ -26,6 +27,11 @@ const rootRouter = (state = initialState, action) => {
         ...state,
         comercios: action.payload,
         backup: action.payload,
+      };
+    case CREADO:
+      return {
+        ...state,
+        
       };
     case PRE_DATOS:
       return {
