@@ -1,5 +1,5 @@
 const { Tiendas, Productos } = require("../DB/db");
-
+const url = require("url");
 // How to relate the two arrays that I have in the function below?
 const tiendasDefault = async (req, res) => {
   // try {
@@ -153,7 +153,6 @@ const allinfo = async (req, res) => {
   try {
     const comercios = await Tiendas.findAll({ include: [Productos] });
     let enviar = comercios.map((e) => e.dataValues);
-console.log(enviar);
     res.status(200).json(enviar);
   } catch (error) {
     console.log(error);
@@ -184,24 +183,24 @@ const tiendaDetail = async (req, res) => {
 };
 const postTienda = async (req, res) => {
   try {
-    let { name, img, ubicacion, rubro, whatsApp, horarioT, horarioM } =
+    let { name, ubicacion, rubro, whatsApp, horarioT, horarioM } =
       req.body;
-    // if (!img) {
-    //   res.status(404).send("falta imagen");
-    // }
+    const img = req.file.path
+console.log(req.file);
+const imagenUrl = url.resolve(req.protocol + "://" + req.get("host"), img );
+
     let aux = ["Carniceria", "Verduleria", "Polleria"];
     if (aux.includes(rubro)) {
       const response = await Tiendas.create({
         name,
-        img,
+        img:imagenUrl,
         ubicacion,
         rubro,
         whatsApp,
         horariosT: horarioT,
         horariosM: horarioM,
       });
-      console.log("entre aqui");
-      console.log(response);
+      res.status(200).json(response.dataValues);
     }
   } catch (error) {
     console.log(error);

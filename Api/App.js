@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const routes = require("./src/routes/index.js");
 const cors = require("cors");
-
 require("./src/DB/db");
 
 const server = express();
@@ -32,7 +31,7 @@ server.use((req, res, next) => {
 });
 
 server.use("/", routes);
-
+server.use("/images", express.static("images"));
 server.use((err, req, res, next) => {
   // eslint-disable-line no-unused-vars
   const status = err.status || 500;

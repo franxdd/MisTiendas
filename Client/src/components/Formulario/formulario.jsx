@@ -4,33 +4,32 @@ import { useDispatch } from "react-redux";
 import { postTienda } from "../../Redux/Actions/actions";
 function Formulario() {
   const dispatch = useDispatch();
-  // const initialValue = {
-  //   name: "",
-  //   img: "",
-  //   ubicacion: "",
-  //   rubro: "",
-  //   whatsApp: "",
-  //   horarios: "",
-  // };
+
   const [form, setForm] = useState();
-
+  const data = new FormData();
   const handleInput = (e) => {
-    if (e.target.id === "img") {
-      const file = e.target.files[0];
-
-      setForm({
-        ...form,
-        img: file,
-      });
-    } else {
-      setForm({
-        ...form,
-        [e.target.name]: e.target.value,
-      });
-    }
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
+  const handleImage = (e)=>{
+    console.log(e.target.files);
+    if (e.target.files !== null) {
+      setForm({
+        ...form, img: e.target.files[0]
+      })
+    }
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
+    data.append("img",form.img);
+    data.append("name",form.name);
+    data.append("ubicacion",form.ubicacion);
+    data.append("rubro",form.rubro);
+    data.append("whatsApp",form.whatsApp);
+    data.append("horarioM",form.horarioM);
+    data.append("horarioT",form.horarioT);
     dispatch(postTienda(form));
   };
   console.log(form);
@@ -45,11 +44,11 @@ function Formulario() {
           placeholder="nombre"
         />
         <input
-          id="img"
+        
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           type="file"
-          name={"img"}
-          onChange={(e) => handleInput(e)}
+        
+          onChange={(e) => handleImage(e)}
         />
         <input
           className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

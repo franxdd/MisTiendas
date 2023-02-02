@@ -2,7 +2,8 @@ const { Tiendas, Productos } = require("../DB/db");
 
 const postProducto = async (req, res) => {
   try {
-    const { name, img, precio, descripcion, id } = req.body;
+    const { name, precio, descripcion, id } = req.body;
+   
     const product = await Productos.create({ name, img, precio, descripcion });
     const store = await Tiendas.findByPk(id);
     store.addProduct(product);

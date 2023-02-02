@@ -11,7 +11,7 @@ function Home() {
   useEffect(() => {
     dispatch(getTiendas());
   }, [dispatch]);
- 
+
   return (
     <div className="w-full bg-red-600 sm:flex md:flex">
       <Filtros />

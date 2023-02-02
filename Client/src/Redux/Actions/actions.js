@@ -121,17 +121,24 @@ export const cerrar = () => {
   };
 };
 export const postTienda = (payload) => {
-  try {
-    return async function (dispatch) {
-      console.log(payload);
-      let creado = axios.post("http://localhost:3001/tiendas/crear", payload);
-      console.log(creado.data);
-      // return dispatch({
-      //   type:CREADO,
-      //   payload: creado.data
-      // })
-    };
-  } catch (error) {
-    console.log(error);
-  }
+  return async function (dispatch) {
+    try {
+      let creado = await axios.post(
+        "http://localhost:3001/tiendas/crear",
+        payload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      return dispatch({
+        type:CREADO,
+        payload: creado.data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
